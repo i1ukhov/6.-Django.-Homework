@@ -56,7 +56,6 @@ class Product(models.Model):
     )
     created_at = models.DateField(verbose_name="Дата создания")
     updated_at = models.DateField(verbose_name="Дата изменения")
-    manufactured_at = models.DateField(verbose_name="Дата производства продукта", **NULLABLE)
 
     class Meta:
         verbose_name = "Продукт"
