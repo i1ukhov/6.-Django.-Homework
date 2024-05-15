@@ -1,0 +1,20 @@
+{% extends 'catalog/base.html' %}
+{% load my_tags %}
+{% block content %}
+<div class="row text-center">
+    <div class="col-12 col-xs-12">
+        <div class="card mb-3 box-shadow">
+            <img src="{{ object.preview | media_filter }}" class="img-fluid">
+            <div class="card-header">
+                <h5 class="my-0 font-weight-normal">{{ object.title }}</h5>
+            </div>
+            <div class="card-body">
+                <h1 class="card-title pricing-card-title"> {{ object.slug }} </h1>
+                <h4 class="card-text"> {{ object.views_count }} просмотров </h4>
+                <p class="card-text">{{ object.content }}</p>
+                <button type="button" class="btn btn-lg btn-block btn-outline-primary">Купить</button>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,29 @@
+{% extends 'catalog/base.html' %}
+{% load my_tags %}
+{% block content %}
+<div class="row text-center">
+    <a class="btn mb-3 btn-lg btn-block btn-outline-primary" href="{% url 'catalog:post_create' %}" role="button">Новый
+        пост</a>
+    {% for object in object_list %}
+    <div class="col-6 col-xs-12">
+        <div class="card mb-3 box-shadow">
+            <img src="{{ object.preview | media_filter }}" class="img-fluid">
+            <div class="card-header">
+                <h5 class="my-0 font-weight-normal">{{ object.title }}</h5>
+            </div>
+            <div class="card-body">
+                <h1 class="card-title pricing-card-title"> {{ object.slug }} </h1>
+                <h4 class="card-text"> {{ object.views_count }} просмотров </h4>
+                <p class="card-text">{{ object.content |truncatechars:100}}</p>
+                <a class="btn btn-lg btn-block btn-outline-primary" href="{% url 'catalog:post_detail' object.pk %}"
+                   role="button">Подробнее</a>
+                <a class="btn btn-lg btn-block btn-outline-primary" href="{% url 'catalog:post_update' object.pk %}"
+                   role="button">Редактировать</a>
+                <a class="btn btn-lg btn-block btn-outline-primary" href="{% url 'catalog:post_delete' object.pk %}"
+                   role="button">Удалить</a>
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+{% endblock %}

@@ -50,7 +50,7 @@ class Product(models.Model):
         **NULLABLE,
         related_name="products",
     )
-    price = models.FloatField(
+    price = models.PositiveIntegerField(
         verbose_name="Цена",
         help_text="Добавьте цену продукта",
     )
@@ -64,3 +64,41 @@ class Product(models.Model):
 
     def __str__(self):
         return f'{self.name}'
+
+
+class BlogPost(models.Model):
+    title = models.CharField(
+        max_length=150,
+        verbose_name="Заголовок",
+        help_text="Введите заголовок",
+    )
+    slug = models.CharField(
+        max_length=150,
+        verbose_name="Слаг",
+        help_text="Добавьте слаг",
+    )
+    content = models.TextField(
+        verbose_name="Содержимое",
+        help_text="Добавьте содержимое",
+    )
+    preview = models.ImageField(
+        upload_to="blog/images",
+        verbose_name="Превью",
+        help_text="Загрузите изображение",
+        **NULLABLE,
+    )
+    created_at = models.DateField(
+        verbose_name="Дата создания",
+        help_text='Добавьте дату создания',
+    )
+    is_published = models.BooleanField(
+        verbose_name="Опубликовано?",
+        help_text="Опубликовать запись",
+        default=False,
+    )
+    views_count = models.IntegerField(
+        verbose_name="Количество просмотров",
+        help_text="Добавьте количество просмотров",
+        default=0,
+        **NULLABLE,
+    )
