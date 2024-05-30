@@ -1,0 +1,23 @@
+{% extends 'catalog/base.html' %}
+{% block content %}
+<form method="post" enctype="multipart/form-data">
+    <div class="row text-center">
+        <div class="col-12">
+            {% csrf_token %}
+            <div class="card mb-4 box-shadow">
+                <div class="card-header">
+                    <h5 class="my-0 font-weight-normal">Удалить продукт "{{object.name}}"?</h5>
+                </div>
+                <div class="card-body">
+                    <p class="card-text">Описание: {{object.description}}</p>
+                    <p class="card-text">Цена: {{object.price}} руб.</p>
+                    <button type="submit" class="btn btn-lg btn-outline-danger">Удалить</button>
+                    <a class="btn btn-lg btn-block btn-outline-primary"
+                       href="{% url 'catalog:products_list' %}"
+                       role="button">Назад</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+{% endblock %}
