@@ -14,14 +14,6 @@ class ProductDetailView(DetailView):
     model = Product
 
 
-# def contacts(request):
-#     if request.method == 'POST':
-#         name = request.POST.get('name')
-#         phone = request.POST.get('phone')
-#         message = request.POST.get('message')
-#         print(f'{name} ({phone}) написал: {message}')
-#     return render(request, 'catalog/contacts.html')
-
 class ContactsView(TemplateView):
     template_name = 'catalog/contacts.html'
 
