@@ -22,7 +22,7 @@ class Category(models.Model):
         ordering = ["name"]
 
     def __str__(self):
-        return f'{self.name}'
+        return f"{self.name}"
 
 
 class Product(models.Model):
@@ -63,7 +63,7 @@ class Product(models.Model):
         ordering = ["name", "category", "price", "created_at", "updated_at"]
 
     def __str__(self):
-        return f'{self.name}'
+        return f"{self.name}"
 
 
 class BlogPost(models.Model):
@@ -89,7 +89,7 @@ class BlogPost(models.Model):
     )
     created_at = models.DateField(
         verbose_name="Дата создания",
-        help_text='Добавьте дату создания',
+        help_text="Добавьте дату создания",
     )
     is_published = models.BooleanField(
         verbose_name="Опубликовано?",
@@ -102,3 +102,34 @@ class BlogPost(models.Model):
         default=0,
         **NULLABLE,
     )
+
+
+class Version(models.Model):
+    product = models.ForeignKey(
+        Product,
+        related_name="version",
+        on_delete=models.SET_NULL,
+        **NULLABLE,
+        verbose_name="версия продукта",
+        help_text="Введите версию продукта",
+    )
+    number = models.PositiveIntegerField(
+        verbose_name="Номер версии", help_text="Введите номер версии"
+    )
+    name = models.CharField(
+        max_length=150,
+        verbose_name="Название версии",
+        help_text="Введите название версии",
+    )
+    is_active = models.BooleanField(
+        verbose_name="Активная версия?",
+        help_text="Отметьте активность версии",
+        default=False,
+    )
+
+    def __str__(self):
+        return f"{self.product}. Версия №{self.number}"
+
+    class Meta:
+        verbose_name = "Версия"
+        verbose_name_plural = "Версии"
