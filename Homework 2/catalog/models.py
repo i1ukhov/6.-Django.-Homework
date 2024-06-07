@@ -2,6 +2,7 @@ from django.db import models
 
 NULLABLE = {"blank": True, "null": True}
 
+from users.models import User
 
 # Create your models here.
 class Category(models.Model):
@@ -56,6 +57,13 @@ class Product(models.Model):
     )
     created_at = models.DateField(auto_now_add=True, verbose_name="Дата создания")
     updated_at = models.DateField(verbose_name="Дата изменения", **NULLABLE)
+
+    owner = models.ForeignKey(
+        User, verbose_name="Кем создан",
+        help_text="Укажите кем создан продукт",
+        **NULLABLE,
+        on_delete=models.SET_NULL
+    )
 
     class Meta:
         verbose_name = "Продукт"

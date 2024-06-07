@@ -2,9 +2,11 @@
 {% load my_tags %}
 {% block content %}
 <div class="d-grid mb-5 d-md-flex justify-content-md-center">
+    {% if user.is_authenticated %}
     <a class="btn col-6 btn-outline-warning"
        href="{% url 'catalog:product_create' %}"
        role="button">Добавить продукт</a>
+    {% endif %}
 </div>
 <div class="row text-center">
     {% for product in object_list %}
