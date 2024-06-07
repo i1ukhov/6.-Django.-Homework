@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
 
     'catalog',
+    'users',
 ]
 
 MIDDLEWARE = [
@@ -137,3 +138,6 @@ MEDIA_URL = 'media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 FIXTURES_ROOT = os.path.join(BASE_DIR, 'fixtures')
+
+AUTH_USER_MODEL = 'users.User'
+
