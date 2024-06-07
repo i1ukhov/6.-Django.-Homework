@@ -9,6 +9,7 @@ https://docs.djangoproject.com/en/3.2/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/3.2/ref/settings/
 """
+import os
 import os.path
 from pathlib import Path
 
@@ -144,3 +145,17 @@ AUTH_USER_MODEL = 'users.User'
 LOGIN_REDIRECT_URL = '/'
 
 LOGOUT_REDIRECT_URL = '/'
+
+LOGIN_URL = '/users/login/'
+
+# Настройки для send_mail
+EMAIL_HOST = 'smtp.yandex.ru'
+EMAIL_PORT = 465
+EMAIL_HOST_USER = f"{os.environ.get('EMAIL_HOST')}"
+EMAIL_HOST_PASSWORD = f"{os.environ.get('SMPT_token')}"
+EMAIL_USE_TLS = False
+EMAIL_USE_SSL = True
+
+SERVER_EMAIL = EMAIL_HOST_USER
+DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
+
