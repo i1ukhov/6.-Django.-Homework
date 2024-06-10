@@ -1,5 +1,5 @@
 from django.contrib import admin
-from catalog.models import Category, Product, Version
+from catalog.models import Category, Product, Version, BlogPost
 
 
 # Register your models here.
@@ -20,3 +20,10 @@ class VersionAdmin(admin.ModelAdmin):
     list_display = ("id", "product", "number", "name", "is_active")
     list_filter = ("product", "is_active")
     search_fields = ("name",)
+
+
+@admin.register(BlogPost)
+class BlogPostAdmin(admin.ModelAdmin):
+    list_display = ("id", "title", "content", "views_count", "is_published")
+    list_filter = ("is_published",)
+    search_fields = ("title", "content", "views_count", "is_published")
