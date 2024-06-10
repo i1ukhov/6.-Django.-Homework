@@ -4,6 +4,7 @@ NULLABLE = {"blank": True, "null": True}
 
 from users.models import User
 
+
 # Create your models here.
 class Category(models.Model):
     name = models.CharField(
@@ -59,17 +60,28 @@ class Product(models.Model):
     updated_at = models.DateField(verbose_name="Дата изменения", **NULLABLE)
 
     owner = models.ForeignKey(
-        User, verbose_name="Кем создан",
+        User,
+        verbose_name="Кем создан",
         help_text="Укажите кем создан продукт",
         **NULLABLE,
-        on_delete=models.SET_NULL
+        on_delete=models.SET_NULL,
+    )
+
+    is_published = models.BooleanField(
+        verbose_name="Опубликован?",
+        help_text="Опубликовать продукт?",
+        default=False
     )
 
     class Meta:
         verbose_name = "Продукт"
         verbose_name_plural = "Продукты"
         ordering = ["name", "category", "price", "created_at", "updated_at"]
-
+        permissions = [
+            ("set_published_status", "Can publish product"),
+            ("can_change_description", "Can change description"),
+            ("can_change_category", "Can change category"),
+        ]
     def __str__(self):
         return f"{self.name}"
 

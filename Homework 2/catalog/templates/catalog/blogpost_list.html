@@ -2,7 +2,7 @@
 {% load my_tags %}
 {% block content %}
 <div class="row text-center">
-    {% if user.is_authenticated %}
+    {% if user.is_authenticated and perms.catalog.add_blogpost%}
     <a class="btn mb-3 btn-lg btn-block btn-outline-primary" href="{% url 'catalog:post_create' %}" role="button">Новый
         пост</a>
     {% endif %}
@@ -19,10 +19,12 @@
                 <p class="card-text">{{ object.content |truncatechars:100}}</p>
                 <a class="btn btn-lg btn-block btn-outline-primary" href="{% url 'catalog:post_detail' object.pk %}"
                    role="button">Подробнее</a>
+                {% if perms.catalog.change_blogpost %}
                 <a class="btn btn-lg btn-block btn-outline-primary" href="{% url 'catalog:post_update' object.pk %}"
                    role="button">Редактировать</a>
                 <a class="btn btn-lg btn-block btn-outline-primary" href="{% url 'catalog:post_delete' object.pk %}"
                    role="button">Удалить</a>
+                {% endif %}
             </div>
         </div>
     </div>
