@@ -2,12 +2,19 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.core.exceptions import PermissionDenied
 from django.forms import inlineformset_factory
 from django.http import HttpResponseRedirect
-from django.shortcuts import render, get_object_or_404
 from catalog.models import Category, Product, BlogPost, Version
 from django.urls import reverse_lazy, reverse
 from django.views.generic import ListView, DetailView, TemplateView, CreateView, UpdateView, DeleteView
 from pytils.translit import slugify
 from catalog.forms import ProductForm, VersionForm, ProductModeratorForm
+from catalog.services import get_categories
+
+
+class CategoryListView(LoginRequiredMixin, ListView):
+    model = Category
+
+    def get_queryset(self):
+        return get_categories()
 
 
 class ProductListView(LoginRequiredMixin, ListView):
