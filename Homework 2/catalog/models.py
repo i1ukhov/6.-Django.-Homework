@@ -1,8 +1,7 @@
 from django.db import models
+from users.models import User
 
 NULLABLE = {"blank": True, "null": True}
-
-from users.models import User
 
 
 # Create your models here.
@@ -82,6 +81,7 @@ class Product(models.Model):
             ("can_change_description", "Can change description"),
             ("can_change_category", "Can change category"),
         ]
+
     def __str__(self):
         return f"{self.name}"
 
